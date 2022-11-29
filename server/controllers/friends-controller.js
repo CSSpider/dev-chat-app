@@ -2,6 +2,7 @@ const db = require('../models/friends-model');
 
 const friendsController = {};
 
+// why is this here? we dont need this.
 friendsController.getUsers = (req, res, next) => {
   const GET_USERS = 'SELECT username, firstName, lastName FROM users';
   console.log('in getUsers middleware');
@@ -16,7 +17,10 @@ friendsController.getUsers = (req, res, next) => {
     });
 };
 
+// create user
 friendsController.createUser = (req, res, next) => {
+  // deconstruct user data
+  // we are no-longer requiring first and last name - this will be replaced with email
   const { username, password, firstName, lastName } = req.body;
   const values = [username, password, firstName, lastName];
   const CREATE_USER =
@@ -31,6 +35,7 @@ friendsController.createUser = (req, res, next) => {
     });
 };
 
+// verify user
 friendsController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
   const values = [username, password];
@@ -47,6 +52,7 @@ friendsController.verifyUser = (req, res, next) => {
     });
 };
 
+// getting messages for chat history?
 friendsController.getMessages = (req, res, next) => {
   //get variables from params
   const { user, friend } = req.params;
@@ -69,6 +75,7 @@ friendsController.getMessages = (req, res, next) => {
     });
 };
 
+// meant for chat history?
 friendsController.sendMessage = (req, res, next) => {
   console.log('in sendMessage, req.body =', req.body);
   const { sender, receiver, body } = req.body;
