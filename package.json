@@ -30,7 +30,8 @@
     "react-router": "^6.4.3",
     "redux": "^4.2.0",
     "redux-thunk": "^2.4.2",
-    "requirejs": "^2.3.6"
+    "requirejs": "^2.3.6",
+    "sass-loader": "^13.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.20.2",
