@@ -5,9 +5,64 @@
 
 body {
     border: 5px;
-    background-color: red;
 }
 
-#friendsContainer {
-    background-color: salmon;
+/* NAVBAR SECTION */
+
+.navbar {
+    background-color: lightblue;
+    height: 5vh;
+    border: 4px solid darkblue;
+}
+
+.navbar > ul {
+    display: flex;
+    justify-content: space-around;
+    list-style: none;
+}
+
+/* DISPLAY CONTAINER */
+.display {
+    border: 4px solid orange;
+    height: 95vh;
+    /* background-color: rgb(114, 74, 0); */
+    display: flex;
+    justify-content: flex-end;
+}
+
+.codebox {
+    background-color: black;
+    color: white;
+    width: 45vw;
+    justify-content: flex-end;
+}
+
+/* CHATBOX */
+.chatbox {
+    background-color: white;
+    width: 45vw;
+}
+
+.chatbox-container {
+    display: flex;
+    flex-direction: column;
+}
+
+#messageInput {
+    width: 30px;
+}
+
+/* #friendsContainer {
+    background-color: greenyellow;
+    width: auto;
+    border: 3px solid blueviolet;
+} */
+
+.friendsList {
+    background-color: aquamarine;
+    width: auto;
+}
+
+.user {
+    background-color: aqua;
 }

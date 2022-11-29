@@ -67,10 +67,10 @@ function ChatContainer (props) {
 
   return (
     <div className='chatbox-container'>
-        <div>Chat:</div>
-        <div><input onChange={readInput}/></div>
-        <div><button onClick={submit}>Submit Chat</button></div>
         <div>{chat}</div>
+        <div id="messageInput"><input onChange={readInput}/></div>
+        <div><button onClick={submit}>Submit Chat</button></div>
+        
     </div>
   )
 }

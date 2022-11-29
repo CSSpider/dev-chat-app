@@ -2,14 +2,17 @@ import React, { Component } from 'react';
 import ChatContainer from './containers/chat-container';
 import MessageContainer from './containers/message-container';
 import { FriendsContainer } from './containers/friends-list-container';
+import Navbar from './containers/Navbar';
+import Display from './containers/Display';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <div>
-      <h1>App!</h1>
-      <FriendsContainer />
-      <ChatContainer />
+      <Navbar />
+      <Display />
+      {/* <FriendsContainer />
+      <ChatContainer /> */}
     </div>
   );
 }

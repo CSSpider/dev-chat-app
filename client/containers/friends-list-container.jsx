@@ -18,7 +18,7 @@ export function FriendsContainer() {
     });
 
     return (
-        <div>
+        <div className="friendsList">
             {toRender}
         </div>
     )
