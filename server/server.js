@@ -52,7 +52,14 @@ app.post('/send', friendsController.sendMessage, (req, res) => {
 });
 
 // catch all
-app.use((req, res) => res.sendStatus(404));
+app.use((req, res) => {
+  const err = {
+    log: '404 page not found',
+    status: 404,
+    message: { err: '404 error' } 
+  }
+  return next(err);
+});
 
 // global error
 app.use((err, req, res, next) => {
