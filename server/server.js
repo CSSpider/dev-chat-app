@@ -34,7 +34,7 @@ app.use('/news', newsRouter);
 app.post('/signup', friendsController.createUser, (req, res) => {
   console.log('request to /signup');
   console.log('redirect to homepage');
-  res.sendStatus(200);
+  return res.status(200).json(res.locals.user);
 });
 
 // login
