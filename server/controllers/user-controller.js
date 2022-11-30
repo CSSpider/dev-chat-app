@@ -1,4 +1,5 @@
 const db = require('../models/database');
+const bcrypt = require('bcrypt');
 
 const friendsController = {};
 
@@ -38,26 +39,37 @@ friendsController.createUser = (req, res, next) => {
 };
 
 // verify user
-friendsController.verifyUser = (req, res, next) => {
+friendsController.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
   const values = [username, password];
-  //const VERIFY_USER = 'SELECT * FROM users WHERE username=$1 AND password=$2;';
-  console.log('in verifyUser middleware');
-  console.log(values);
-  res.locals.user = {username: 'Dasha'};
-  next();
-  // console.log(username, password);
-  /*
-  db.query(VERIFY_USER, values)
-    .then((response) => {
-      res.locals.user = response.rows;
-      return next();
-    })
-    .catch((err) => {
-      return next({ err });
-    });
-  */
 
+  console.log('incoming username / pw:', values);
+
+  try{
+    // find the password that matches this username in the DB
+    const query = `SELECT password FROM users WHERE username = '${username}'`;
+    const params = [];
+
+    const result = await db.query(query, params);
+
+    console.log('pw input:', password, 'ps in db', result.rows[0].password);
+
+    const pwcompare = await bcrypt.compare(password, result.password);
+
+    // if nothing is found, OR password username mismatch, throw error
+    if (result.rows[0] === undefined || !pwcompare) throw 'Wrong username or password';
+
+    // otherwise continue
+    res.locals.user = {username};
+    return next();
+  }
+  catch (err) {
+    next({
+      log: 'userController.verifyUser error - wrong user/pass',
+      status: 400,
+      message: { err: err }
+    })
+  }
 };
 
 // getting messages for chat history?
