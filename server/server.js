@@ -42,7 +42,7 @@ app.post('/signup', friendsController.createUser, (req, res) => {
 app.post('/login', friendsController.verifyUser, (req, res) => {
   console.log('request to /login');
   if (res.locals.user.length === 0) return next({ log: 'invalid login' });
-  res.sendStatus(200);
+  return res.status(200).json(res.locals.user);
 });
 
 // not sure what this is for. 

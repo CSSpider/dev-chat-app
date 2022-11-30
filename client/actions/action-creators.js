@@ -21,9 +21,43 @@ export const fetchAllUsers = () => async dispatch => {
   }
 }
 
-//load messages
-export const fetchMessages = () => async dispatch => {
-  const response = await fetch ('')
+//login user
+export const signInUser = credentials => async dispatch => {
+  console.log('login in dispatch')
+  const response = await fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: credentials.username,
+      password: credentials.password
+    })
+  });
+  const data = await response.json();
+  console.log(data);
+  return( dispatch({
+    type: types.LOGIN_USER,
+    payload: data.username
+  }));
 }
+
+//load messages
+/*
+export const fetchMessages = (user, friend) => async (dispatch) => {
+  console.log('USER', user);
+  console.log('FRIEND', friend);
+  const string = `/users/${user}/${friend}`;
+  console.log('++++++++++++++++++++++++++', string);
+  const response = await fetch(`/users/${user}/${friend}`);
+  const parsedResponse = await response.json();
+  console.log('ppppppppppp', parsedResponse);
+  return {
+    type: types.LOAD_MESSAGES,
+    payload: parsedResponse,
+  };
+};
+*/
+
 
 //send a message
