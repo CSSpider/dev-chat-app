@@ -1,10 +1,6 @@
 const { Pool } = require('pg');
 
-// require dotENV
-// require('dotenv').config();
-
-const PG_URI = require(process.env.URI)
-console.log(process.env.URI)
+const PG_URI = require('../../credentials.js')
 
 const pool = new Pool({
   connectionString: PG_URI,
