@@ -11,7 +11,7 @@ import Auth from './components/authentification/auth';
 const App = () => {
 
   const username = useSelector(state => state.users.currentUser);
-     
+  console.log('username App.js', username); 
   return (
     <>
       {username &&
