@@ -1,11 +1,10 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-const dotenv = require('dotenv');
 
-// port
-const PORT = 3000;
-// console.log('this is URI',process.env.URI)
+// dotENV
+require('dotenv').config();
+
 
 // require in our routers
 const usersRouter = require('./routes/users');
@@ -34,14 +33,14 @@ app.use('/news', newsRouter);
 app.post('/signup', friendsController.createUser, (req, res) => {
   console.log('request to /signup');
   console.log('redirect to homepage');
-  return res.status(200).json(res.locals.user);
+  res.sendStatus(200);
 });
 
 // login
 app.post('/login', friendsController.verifyUser, (req, res) => {
   console.log('request to /login');
   if (res.locals.user.length === 0) return next({ log: 'invalid login' });
-  return res.status(200).json(res.locals.user);
+  res.sendStatus(200);
 });
 
 // not sure what this is for. 
@@ -70,11 +69,6 @@ app.use((err, req, res, next) => {
   const errorObj = Object.assign(defaultErr, err);
   console.log('global error handler caught: ', errorObj.log);
   return res.status(errorObj.status).json(errorObj.message);
-});
-
-//listener
-app.listen(PORT, () => {
-  console.log("listening to port: ", PORT);
 });
 
 module.exports = app;
