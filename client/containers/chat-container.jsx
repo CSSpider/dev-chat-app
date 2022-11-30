@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MessageContainer from './message-container';
+
 // import * as actions from '../actions'
 const client = new WebSocket('ws://localhost:3002');
 
@@ -8,26 +9,13 @@ const client = new WebSocket('ws://localhost:3002');
 import {codeChangeActionCreator} from '../actions/action-creators';
 
 function ChatContainer (props) {
-
+  
+  const username = useSelector(state => state.users.currentUser);
+  console.log('current User:', username);
   const [input, setInput] = useState('');
-  const [sender, setUsername] = useState('arthursu'); // will come from redux
+  const [sender, setUsername] = useState(username); // will come from redux
   const [receiver, setFriendName] = useState('kevindooley'); // will come from redux
-  const [chatMessages, setChatMessages] = useState([
-    {
-      body: 'hi',
-      sender: 'arthursu',
-      receiver: 'kevindooley'
-    },
-    {
-      body: 'yoyo',
-      sender: 'kevindooley',
-      receiver: 'arthursu'
-    },
-    {
-      body: 'my guy',
-      sender: 'arthursu',
-      receiver: 'kevindooley'
-    }]); // will come from redux
+  const [chatMessages, setChatMessages] = useState([]); // will come from redux
 
     console.log('chatMessages', chatMessages);
 
@@ -51,15 +39,15 @@ function ChatContainer (props) {
   const dispatch = useDispatch();
     
   function submit() {
-    console.log('pressed!');
-    console.log('send message: ', input);
+    // console.log('pressed!');
+    // console.log('send message: ', input);
     const messageObj = {
         type: 'chat',
         sender,
         body: input,
         receiver
     }
-    console.log('messageObj: ', messageObj);
+    console.log('messageObj in Submit: ', messageObj);
     client.send(JSON.stringify(messageObj));
   }
 
@@ -70,8 +58,10 @@ function ChatContainer (props) {
   let chat = [];
   for (let i = 0; i < chatMessages.length; i++) {
     let className = 'client';
-    if (chatMessages.sender !== sender) className = 'friend';
-    chat.push(<MessageContainer sender={chatMessages[i].sender} message={chatMessages[i].body} className={className}/>);
+    console.log('HIT')
+    console.log('chatMessages.sender', chatMessages.sender);
+    chatMessages.sender !== sender ? className = 'friend' : className = 'client';
+    chat.push(<MessageContainer sender={username} message={chatMessages[i].body} className={className}/>);
   }
 
   return (

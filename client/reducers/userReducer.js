@@ -1,14 +1,10 @@
 import * as types from '../constants/actionTypes'
 
 const initialState = {
-    currentUser: 'hey',
+    currentUser: '',
     users: []
 }
 
-// const testInitialState = {users:[{username: "camkelly",
-// firstName: "Cam",
-// lastName: "Kelly"}]
-// }
 
 const userReducer = (state = initialState, action) => {
     let currentUser = '';
