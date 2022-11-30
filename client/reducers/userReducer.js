@@ -3,6 +3,7 @@ import * as types from '../constants/actionTypes'
 const initialState = {
     currentUser: '',
     invalidCredentials: {status: false, message: ''},
+    users: []
 }
 
 
