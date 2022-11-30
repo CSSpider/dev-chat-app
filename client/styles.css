@@ -13,6 +13,9 @@ body {
     background-color: lightblue;
     height: 5vh;
     border: transparent;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .navbar > ul {
@@ -25,7 +28,6 @@ body {
 .display {
     border: transparent;
     height: 95vh;
-    /* background-color: rgb(114, 74, 0); */
     display: flex;
     justify-content: flex-end;
 }
@@ -41,16 +43,36 @@ body {
 /* CHATBOX */
 .chatbox {
     background-color: white;
-    border: 2px solid lightgrey;
+    border: transparent;
     margin: 15px;
     width: 40vw;
     height: 50vh;
     border-radius: 20px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 }
 
 .chatbox-container {
     display: flex;
     flex-direction: column;
+    height: 100%;
+}
+
+#chat {
+    /* border: 1px solid red; */
+    height: 75%;
+}
+
+
+#sendBtn {
+  background-color: lightblue; /* Green */
+  border: none;
+  color: white;
+  padding: 5px 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 8px;
+  border-radius: 12px;
 }
 
 .chatPartner {
@@ -72,11 +94,18 @@ body {
     margin-left: 10px;
     margin-bottom: 10px;;
     padding: 5px;
-    max-width: 40%;
+    max-width: max-content;
     background-color: rgb(233, 232, 232);
     border: transparent;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.15) 0px 3px 8px;;
+}
+
+.sender {
+    margin-top: 10px;
+    margin-left: 10px;
+    color: rgb(171, 171, 171);
+    font-size: small;
 }
 
 .messageInput {
@@ -93,7 +122,7 @@ body {
     width: 10vw;
     height: 50vh;
     margin-top: 20px;
-    border: 2px solid lightgray;
+    border: transparent;
     border-radius: 10px;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
     display: flex;
@@ -105,8 +134,7 @@ body {
     align-self: flex-end;
 }
 
-
-
 .user {
-    background-color: aqua;
+    background-color: transparent;
+    max-width: 10;
 }

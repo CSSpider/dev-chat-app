@@ -6,7 +6,7 @@ function Codebox() {
     // const messages = useSelector(state => state.messages)
     return (
         <div className="codebox">
-            <h1>CODEBOX</h1>
+            <p style={{margin: '20px', color: 'limegreen'}}>// This is for live coding</p>
         </div>
     )
 }
