@@ -8,7 +8,7 @@ function MessageContainer(props) {
     return (
         <div>
             <div className="sender">
-            {props.sender}
+                {props.sender}
             </div>
             <div className="messageContainer">
                 <div className={props.className}>

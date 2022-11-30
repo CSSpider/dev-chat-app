@@ -1,3 +1,5 @@
+
+
 .homepageContainer {
     border: 3px;
     background-color: blue;
@@ -44,11 +46,11 @@ body {
 .chatbox {
     background-color: white;
     border: transparent;
-    margin: 15px;
+    margin-top: 15px;
     width: 40vw;
     height: 50vh;
-    border-radius: 20px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: 1px solid rgb(233, 232, 232);
+    /* box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px; */
 }
 
 .chatbox-container {
@@ -59,12 +61,18 @@ body {
 
 #chat {
     /* border: 1px solid red; */
+    margin-bottom: 15px;
+    overflow: scroll;
     height: 75%;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    width: 100%;
 }
 
 
-#sendBtn {
-  background-color: lightblue; /* Green */
+/* #sendBtn {
+  background-color: lightblue; Green
   border: none;
   color: white;
   padding: 5px 10px;
@@ -73,7 +81,7 @@ body {
   display: inline-block;
   font-size: 8px;
   border-radius: 12px;
-}
+} */
 
 .chatPartner {
     display: flex;
@@ -92,7 +100,6 @@ body {
 
 .messageContainer {
     margin-left: 10px;
-    margin-bottom: 10px;;
     padding: 5px;
     max-width: max-content;
     background-color: rgb(233, 232, 232);
@@ -108,26 +115,31 @@ body {
     font-size: small;
 }
 
-.messageInput {
-    width: max-content;
-}
-
-/* #friendsContainer {
-    background-color: greenyellow;
-    width: auto;
-    border: 3px solid blueviolet;
-} */
-
 .friendsList {
     width: 10vw;
     height: 50vh;
-    margin-top: 20px;
+    margin-top: 15px;
     border: transparent;
-    border-radius: 10px;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    background-color: rgb(248, 248, 248);
+    border: 1px solid rgb(233, 232, 232);
     display: flex;
     flex-direction: column;
     align-items: center;
+}
+
+#friendListHeader {
+    background-color: transparent;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.friends {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    margin-left: 30px;
+    margin-bottom: 20px;
 }
 
 .messageInput {
@@ -135,6 +147,38 @@ body {
 }
 
 .user {
-    background-color: transparent;
+    /* background-color: red; */
     max-width: 10;
+    padding: 4px;
 }
+
+.user:hover {
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button {
+    display: inline-block;
+    background-color: lightblue;
+    border: transparent;
+    border-radius: 15px;
+    margin-left: 5px;
+    color: black;
+    font-weight: bold;
+    text-align: center;
+    font-size: 12px;
+    padding: 5px;
+    width: 60px;
+    transition: all 0.5s;
+    cursor: pointer;
+    margin-right: 10px;
+  }
+
+  input {
+    width: 100%;
+    border: 1px solid rgb(204, 203, 203);
+    /* border: transparent; */
+    border-radius: 15px;
+    padding: 0px 10px; 
+    margin: 0px 0px 0px 10px;
+  }
