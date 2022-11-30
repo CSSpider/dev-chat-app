@@ -1,4 +1,4 @@
-const db = require('./friends-model.js');
+const db = require('./database.js');
 
 // const userTable = `
 	// CREATE TABLE users (
