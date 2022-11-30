@@ -65,7 +65,9 @@ friendsController.verifyUser = async (req, res, next) => {
 
     console.log('pw input:', password, 'ps in db', result.rows[0].password);
 
-    const pwcompare = await bcrypt.compare(password, result.password);
+    let pwcompare = await bcrypt.compare(password, result.rows[0].password);
+
+    console.log('pwcompare results ok?', pwcompare);
 
     // if nothing is found, OR password username mismatch, throw error
     if (result.rows[0] === undefined || !pwcompare) throw 'Wrong username or password';
