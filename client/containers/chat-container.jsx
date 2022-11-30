@@ -70,7 +70,6 @@ function ChatContainer (props) {
         <div>{chat}</div>
         <input onChange={readInput} placeholder="Message"/>
         <div><button onClick={submit}>Send</button></div>
-        
     </div>
   )
 }
