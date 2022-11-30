@@ -2,11 +2,23 @@ import React from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
 import loginPic from '../static/login.png';
+import * as actions from '../actions/action-creators';
+import { connect } from 'react-redux';
+
+const mapDispatchToProps = dispatch => {
+    return {
+      // dispatching plain actions
+      signInUser: data => dispatch(actions.signInUser(data)),
+    }
+  }
 
 const Auth = (props) => {
     const {register, handleSubmit, formState: { errors } } = useForm();
+    
 
-    const onSubmit = data =>  console.log(data);
+    const onSubmit = data =>  {
+        props.signInUser(data);
+    }
 
     return (
         <main className="auth">
@@ -24,4 +36,4 @@ const Auth = (props) => {
     );
 }
 
-export default Auth;
+export default connect(null, mapDispatchToProps)(Auth);

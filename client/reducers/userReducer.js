@@ -12,6 +12,13 @@ const initialState = {
 
 const userReducer = (state = initialState, action) => {
     switch (action.type) {
+        case types.LOGIN_USER:
+            console.log('in login user');
+            const currentUser = action.payload;
+            return {
+                ...state,
+                currentUser
+            }
         case types.LOAD_USERS:
             console.log('in load users case');
             const users = action.payload;
@@ -20,13 +27,6 @@ const userReducer = (state = initialState, action) => {
                 users
             }
             //action to authentificate a user
-        case types.LOGIN_USER:
-            console.log('in login user');
-            const currentUser = action.payload;
-            return {
-                ...state,
-                currentUser
-            }
         default: {
             return state;
         }

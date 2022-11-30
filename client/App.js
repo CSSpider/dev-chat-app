@@ -6,12 +6,14 @@ import { useSelector, useDispatch } from "react-redux";
 import Auth from './components/auth';
 
 const App = () => {
+
   const username = useSelector(state => state.users.currentUser);
      
   return (
     <>
       {username &&
         <div>
+          {username}
           <h1>App!</h1>
           <FriendsContainer/>
           <ChatContainer/>

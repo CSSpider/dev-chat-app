@@ -23,6 +23,7 @@ export const fetchAllUsers = () => async dispatch => {
 
 //login user
 export const signInUser = credentials => async dispatch => {
+  console.log('login in dispatch')
   const response = await fetch('/login', {
     method: 'POST',
     headers: {
@@ -33,11 +34,12 @@ export const signInUser = credentials => async dispatch => {
       password: credentials.password
     })
   });
-  const parsedResponse = await response.json();
-  return {
+  const data = await response.json();
+  console.log(data);
+  return( dispatch({
     type: types.LOGIN_USER,
-    payload: parsedResponse.username
-  }
+    payload: data.username
+  }));
 }
 
 //load messages

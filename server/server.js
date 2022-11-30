@@ -41,7 +41,7 @@ app.post('/login', friendsController.verifyUser, (req, res) => {
   //  redirect user to homepage on success
   //   console.log(res.locals.user.length);
   if (res.locals.user.length === 0) return next({ log: 'invalid login' });
-  res.sendStatus(200);
+  return res.status(200).json(res.locals.user);
 });
 
 app.post('/send', friendsController.sendMessage, (req, res) => {

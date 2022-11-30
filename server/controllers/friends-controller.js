@@ -34,9 +34,13 @@ friendsController.createUser = (req, res, next) => {
 friendsController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
   const values = [username, password];
-  const VERIFY_USER = 'SELECT * FROM users WHERE username=$1 AND password=$2;';
+  //const VERIFY_USER = 'SELECT * FROM users WHERE username=$1 AND password=$2;';
   console.log('in verifyUser middleware');
+  console.log(values);
+  res.locals.user = {username: 'Dasha'};
+  next();
   // console.log(username, password);
+  /*
   db.query(VERIFY_USER, values)
     .then((response) => {
       res.locals.user = response.rows;
@@ -45,6 +49,8 @@ friendsController.verifyUser = (req, res, next) => {
     .catch((err) => {
       return next({ err });
     });
+  */
+
 };
 
 friendsController.getMessages = (req, res, next) => {
