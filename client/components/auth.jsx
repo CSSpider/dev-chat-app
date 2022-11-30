@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from 'react-hook-form';
-import loginPic from '../static/login.png';
+import loginPic from '../static/login.png'
+import Login from './login';
 import * as actions from '../actions/action-creators';
 import { connect } from 'react-redux';
 
@@ -30,32 +31,24 @@ const Auth = (props) => {
     const textForButton = needsSignUp ? "Log in" : "Sign up";
 
     return (
-        <main className="auth">
-            {!needsSignUp &&
-            <>
-                <div>
-                    <h1 className="title-auth-form">Log in </h1>
-                    <img src={loginPic} />
-                </div>
-                <form onSubmit={handleSubmit(onSubmit)} className="login-form">
-                    <input className="auth-input" {...register("username", { required: true })} name="username" type="text" />
-                    <input className="auth-input" {...register("email", { required: true })} name="email" type="email" />
-                    <input className="auth-input" {...register("password", { required: true })} name="password" type="password" />
-                    <input className="auth-input" type="submit" />
-                </form>
-            </>
-            } 
-            {needsSignUp && console.log('here is going to be sign up')
-                // place for Sign Up form
-            }
-
+        <>
+            <main className="auth">
+                {!needsSignUp &&
+                <Login register={register} 
+                    loginPic={loginPic} 
+                    handleSubmit={handleSubmit} 
+                    onSubmit={onSubmit} />
+                } 
+                {needsSignUp && console.log('here is going to be sign up')
+                    // place for Sign Up form
+                }
+            </main>
             <div className="switch-form">
-                {!needsSignUp && <h1>Don't have an account?</h1>}
-                {needsSignUp && <h1>Already have an account?</h1>}
+                {!needsSignUp && <h2>Don't have an account?</h2>}
+                {needsSignUp && <h2>Already have an account?</h2>}
                 <button onClick={() => handleSetSignUp()}>{textForButton}</button>
             </div>
-
-        </main>
+        </>
     );
 }
 

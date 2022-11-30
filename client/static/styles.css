@@ -1,11 +1,10 @@
+* {
+    margin: 0;
+}
+
 .homepageContainer {
     border: 3px;
     background-color: blue;
-}
-
-body {
-    border: 5px;
-    background-color: rgb(22, 22, 26);
 }
 
 #friendsContainer {
@@ -38,9 +37,13 @@ form {
 
 .auth-container {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     padding-top: 100px;
+    background-color: rgb(22, 22, 26);
+    width: 100vw;
+    height: 100vh;
 }
 
 .auth-input {
@@ -53,6 +56,17 @@ form {
     border: none;
     border-bottom: 1px solid rgb(221, 221, 221);
 }
+
+.switch-form {
+    background-color: rgb(33, 34, 40);
+    margin-top: 30px;
+    color: rgb(221, 221, 221);
+    width: 450px;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+
 
 input:first-of-type {
     border-top: 1px solid rgb(221, 221, 221);
