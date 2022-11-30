@@ -11,6 +11,7 @@ export function FriendsContainer() {
     }), [])
 
     const userData = useSelector(state => state.users.users);
+    console.log('userData', userData)
     const toRender = [];
 
     userData.forEach(user => {
