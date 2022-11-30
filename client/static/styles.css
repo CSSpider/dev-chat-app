@@ -5,6 +5,7 @@
 
 body {
     border: 5px;
+    background-color: rgb(22, 22, 26);
 }
 
 #friendsContainer {
@@ -12,6 +13,58 @@ body {
 }
 
 .auth {
-    margin: auto;
-    border: 1px solid black;
+    border-radius: 10px;
+    width: 450px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(33, 34, 40);
+    color: rgb(243, 76, 181);
+}
+
+form {
+    margin-bottom: 0;
+}
+
+.auth div {
+    text-align: center;
+}
+
+.auth img {
+    width: 200px;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+}
+
+.auth-input {
+    display: block;
+    width: 450px;
+    height: 50px;
+    background-color: rgb(33, 34, 40);
+    color: rgb(221, 221, 221);
+    font-size: 20px;
+    border: none;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+input:first-of-type {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+input[type="submit"] {
+    border-bottom: none;
+    background-color: rgb(243, 76, 181);
+    border-radius: 0 0 10px 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: rgb(223, 56, 161);
+    cursor: pointer;
 }

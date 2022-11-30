@@ -10,14 +10,15 @@ const Auth = (props) => {
 
     return (
         <main className="auth">
-            <h4 className="title-auth-form">Log in </h4>
-            <img src={loginPic} />
+            <div>
+                <h1 className="title-auth-form">Log in </h1>
+                <img src={loginPic} />
+            </div>
             <form onSubmit={handleSubmit(onSubmit)} className="login-form">
-                <input {...register("username", { required: true })} name="username" type="text" />
-                <input {...register("email", { required: true })} name="email" type="email" />
-                {errors.email && <span style={{ color: "red" }}>*Email* is mandatory </span>}
-                <input  {...register("password", { required: true })} name="password" type="password" />
-                <input type="submit" />
+                <input className="auth-input" {...register("username", { required: true })} name="username" type="text" />
+                <input className="auth-input" {...register("email", { required: true })} name="email" type="email" />
+                <input className="auth-input" {...register("password", { required: true })} name="password" type="password" />
+                <input className="auth-input" type="submit" />
             </form>
         </main>
     );

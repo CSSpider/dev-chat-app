@@ -16,7 +16,7 @@ const App = () => {
           <FriendsContainer/>
           <ChatContainer/>
         </div>}
-      {!username && <Auth />}
+      {!username && <div className="auth-container"><Auth /></div>}
     </>
   );
 }
