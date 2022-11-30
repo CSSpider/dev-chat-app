@@ -1,6 +1,7 @@
 import * as types from '../constants/actionTypes'
 
 const initialState = {
+    currentUser: '',
     users: []
 }
 
@@ -15,7 +16,16 @@ const userReducer = (state = initialState, action) => {
             console.log('in load users case');
             const users = action.payload;
             return {
+                ...state,
                 users
+            }
+            //action to authentificate a user
+        case types.LOGIN_USER:
+            console.log('in login user');
+            const currentUser = action.payload;
+            return {
+                ...state,
+                currentUser
             }
         default: {
             return state;

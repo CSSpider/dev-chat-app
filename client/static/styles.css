@@ -5,9 +5,13 @@
 
 body {
     border: 5px;
-    background-color: red;
 }
 
 #friendsContainer {
     background-color: salmon;
+}
+
+.auth {
+    margin: auto;
+    border: 1px solid black;
 }
