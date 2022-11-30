@@ -20,11 +20,12 @@ const Auth = (props) => {
     const {register, handleSubmit, formState: { errors } } = useForm();
     const [needsSignUp, setSignUp] = useState(false);
     
-    // function for handling data from the form
+    // function for handling data from the form for user authentification
     const onLogin = data =>  {
         props.signInUser(data);
     }
 
+    // function for handling data from the from for user authorization
     const onSignUp = data => {
         props.signUpUser(data);
     }

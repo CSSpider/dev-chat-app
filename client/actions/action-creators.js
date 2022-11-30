@@ -23,23 +23,26 @@ export const fetchAllUsers = () => async dispatch => {
 
 //login user
 export const signInUser = credentials => async dispatch => {
-  console.log('login in dispatch')
-  const response = await fetch('/login', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      username: credentials.username,
-      password: credentials.password
-    })
-  });
-  const data = await response.json();
-  console.log(data);
-  return( dispatch({
-    type: types.LOGIN_USER,
-    payload: data.username
-  }));
+  // making a fetch request to the backend
+  // sending username and password
+  fetch('/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        username: credentials.username,
+        password: credentials.password
+      })})
+      .then(response => response.json())
+      .then(data => dispatch({
+        type: types.LOGIN_USER,
+        payload: data.username
+      }))
+      .catch(err => {
+        err;
+      });
+  console.log('Error occured');
 }
 
 // sign up user 
