@@ -4,6 +4,7 @@ import App from "./App";
 import React from "react";
 import { createRoot } from 'react-dom/client';
 import css from "./static/styles.css";
+import appCss from "./static/appStyles.css";
 // import { loadUsersActionCreator } from "./actions/action-creators";
 
 

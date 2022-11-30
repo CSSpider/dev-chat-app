@@ -5,6 +5,7 @@ import MessageContainer from './message-container';
 const client = new WebSocket('ws://localhost:3002');
 
 function ChatContainer (props) {
+
   const [input, setInput] = useState('');
   const [sender, setUsername] = useState('arthursu'); // will come from redux
   const [receiver, setFriendName] = useState('kevindooley'); // will come from redux
@@ -24,23 +25,13 @@ function ChatContainer (props) {
       sender: 'arthursu',
       receiver: 'kevindooley'
     }]); // will come from redux
-//   console.log('client in component', client)
-//   client.on('open', () => {
-//     client.send('hello');
-//   })
-  // client.onopen = (event) => {
-  //   client.send(JSON.stringify(sender, ' has connected'));
-  //   // console.log('here')
-  // };
+
+    console.log('chatMessages', chatMessages);
 
   client.onmessage = (event) => {
     const message = JSON.parse(event.data);
-    console.log('message in chatbox: ', message.body);
-    console.log('chatMessages: ', chatMessages);
     setChatMessages((prev) => [...prev, message]);
   }
-
-  
 
   function submit() {
     console.log('pressed!');
@@ -62,15 +53,16 @@ function ChatContainer (props) {
   for (let i = 0; i < chatMessages.length; i++) {
     let className = 'client';
     if (chatMessages.sender !== sender) className = 'friend';
-    chat.push(<MessageContainer message={chatMessages[i].body} className={className}/>);
+    chat.push(<MessageContainer sender={chatMessages[i].sender} message={chatMessages[i].body} className={className}/>);
   }
 
   return (
     <div className='chatbox-container'>
-        <div>{chat}</div>
-        <input onChange={readInput} placeholder="Message"/>
-        <div><button onClick={submit}>Send</button></div>
-        
+        <div id="chat">{chat}</div>
+        <div id="msgAndSendBtn" style={{display: "flex"}}>
+          <input onChange={readInput} placeholder="Message" />
+          <div id="sendBtn"><button onClick={submit}>Send</button></div>
+        </div>
     </div>
   )
 }
