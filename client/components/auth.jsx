@@ -57,8 +57,8 @@ const Auth = (props) => {
                 }
             </main>
             <div className="switch-form">
-                {!needsSignUp && <h2>Don't have an account?</h2>}
-                {needsSignUp && <h2>Already have an account?</h2>}
+                {!needsSignUp && <p>Don't have an account?</p>}
+                {needsSignUp && <p>Already have an account?</p>}
                 <button onClick={() => handleSetSignUp()}>{textForButton}</button>
             </div>
         </>

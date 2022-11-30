@@ -67,6 +67,27 @@ form {
     border-radius: 10px;
     text-align: center;
     margin-top: 80px;
+    font-size: 20px;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.switch-form button {
+    height: 50px;
+    border: none;
+    border-left: 1px solid rgb(243, 76, 181);
+    background-color: rgb(33, 34, 40);
+    color: rgb(221, 221, 221);
+    font-size: 18px;
+    padding-left: 10px;
+    transition: color 0.7s;
+}
+
+.switch-form button:hover {
+    cursor: pointer;
+    color: rgb(243, 76, 181);
+
 }
 
 
