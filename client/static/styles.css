@@ -13,6 +13,7 @@
 
 .auth {
     border-radius: 10px;
+    padding-top: 10px;
     width: 450px;
     height: 500px;
     display: flex;
@@ -38,7 +39,7 @@ form {
 .auth-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
     align-items: center;
     padding-top: 100px;
     background-color: rgb(22, 22, 26);
@@ -65,6 +66,7 @@ form {
     height: 50px;
     border-radius: 10px;
     text-align: center;
+    margin-top: 80px;
 }
 
 
