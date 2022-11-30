@@ -1,2 +1,5 @@
-node_modules
+node_modules/
 build/
+package-lock.json
+.env
+credentials.js

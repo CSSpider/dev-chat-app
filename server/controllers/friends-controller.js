@@ -1,7 +1,8 @@
-const db = require('../models/friends-model');
+const db = require('../models/database');
 
 const friendsController = {};
 
+// why is this here? we dont need this.
 friendsController.getUsers = (req, res, next) => {
   const GET_USERS = 'SELECT username, firstName, lastName FROM users';
   console.log('in getUsers middleware');
@@ -16,27 +17,37 @@ friendsController.getUsers = (req, res, next) => {
     });
 };
 
+// create user
 friendsController.createUser = (req, res, next) => {
+  // deconstruct user data
+  // we are no-longer requiring first and last name - this will be replaced with email
   const { username, password, firstName, lastName } = req.body;
   const values = [username, password, firstName, lastName];
-  const CREATE_USER =
-    'INSERT INTO users (username, password, firstName, lastName) VALUES ($1, $2, $3, $4);';
-  console.log('in createUser middleware');
-  db.query(CREATE_USER, values)
-    .then((response) => {
-      return next();
-    })
-    .catch((err) => {
-      return next({ err });
-    });
+  res.locals.user = {username: "Dasha"};
+  next();
+  // const CREATE_USER =
+  //   'INSERT INTO users (username, password, firstName, lastName) VALUES ($1, $2, $3, $4);';
+  // console.log('in createUser middleware');
+  // db.query(CREATE_USER, values)
+  //   .then((response) => {
+  //     return next();
+  //   })
+  //   .catch((err) => {
+  //     return next({ err });
+  //   });
 };
 
+// verify user
 friendsController.verifyUser = (req, res, next) => {
   const { username, password } = req.body;
   const values = [username, password];
-  const VERIFY_USER = 'SELECT * FROM users WHERE username=$1 AND password=$2;';
+  //const VERIFY_USER = 'SELECT * FROM users WHERE username=$1 AND password=$2;';
   console.log('in verifyUser middleware');
+  console.log(values);
+  res.locals.user = {username: 'Dasha'};
+  next();
   // console.log(username, password);
+  /*
   db.query(VERIFY_USER, values)
     .then((response) => {
       res.locals.user = response.rows;
@@ -45,8 +56,11 @@ friendsController.verifyUser = (req, res, next) => {
     .catch((err) => {
       return next({ err });
     });
+  */
+
 };
 
+// getting messages for chat history?
 friendsController.getMessages = (req, res, next) => {
   //get variables from params
   const { user, friend } = req.params;
@@ -69,6 +83,7 @@ friendsController.getMessages = (req, res, next) => {
     });
 };
 
+// meant for chat history?
 friendsController.sendMessage = (req, res, next) => {
   console.log('in sendMessage, req.body =', req.body);
   const { sender, receiver, body } = req.body;

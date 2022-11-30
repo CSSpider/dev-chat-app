@@ -38,17 +38,11 @@ module.exports = {
         },
       },
       {
-        test: /\.(s(a|c)ss)$/,
-        exclude: /node_modules/,
-        // use: [
-        //   MiniCssExtractPlugin.loader,
-        //   {
-        //     loader: 'css-loader'
-        //   },
-        //   {
-        //     loader:'sass-loader'
-        //   },
-        // ]
+        test: /\.css/,
+        use: [
+          "style-loader",
+          "css-loader",
+        ],
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/i,

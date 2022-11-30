@@ -1,9 +1,11 @@
 // globalized state 
 import reducers from "./reducers/index";
-import { createStore } from "redux";
+// to call async functions we need to use redux-think middleware
+import thunk from "redux-thunk" 
+import { createStore, applyMiddleware } from "redux";
 
 const store = createStore (
-    reducers
+    reducers,  applyMiddleware(thunk)
 );
 
 export default store;
