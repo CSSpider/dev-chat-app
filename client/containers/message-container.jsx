@@ -5,9 +5,11 @@ import { useSelector, useDispatch } from "react-redux";
 function MessageContainer(props) {
     // const messages = useSelector(state => state.messages)
     return (
-        <div className={props.className}>
-        {props.message}
-        </div>
+        <div className="messageContainer">
+            <div className={props.className}>
+            {props.message}
+            </div>
+        </div>    
     )
 }
 
