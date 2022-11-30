@@ -38,7 +38,7 @@ export const signInUser = credentials => async dispatch => {
   const data = await response.json();
   let action = {};
   if (data.err) {
-    action = addInvalidCredentialsActionCreator();
+    action = invalidCredentialsActionCreator('Invalid username or password');
   } else {
     action.type = types.LOGIN_USER,
     action.payload = data.username
@@ -46,8 +46,9 @@ export const signInUser = credentials => async dispatch => {
   return dispatch(action);
 }
 
-export const addInvalidCredentialsActionCreator = () => ({
-  type: types.USER_ERROR
+export const invalidCredentialsActionCreator = str => ({
+  type: types.USER_ERROR,
+  payload: str
 });
 
 // sign up user 
@@ -67,10 +68,14 @@ export const signUpUser = credentials => async dispatch => {
     })
   });
   const data = await response.json();
-  return( dispatch({
-    type: types.SIGN_UP_USER,
-    payload: data.username
-  }));
+  let action = {};
+  if (data.err) {
+    action = invalidCredentialsActionCreator('This username or email is already taken');
+  } else {
+    action.type = types.LOGIN_USER,
+    action.payload = data.username
+  }
+  return dispatch(action);
 }
 
 //load messages

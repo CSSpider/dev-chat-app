@@ -7,7 +7,6 @@ import Display from './containers/Display';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
 import Auth from './components/authentification/auth';
-import "./styles.css";
 
 const App = () => {
 

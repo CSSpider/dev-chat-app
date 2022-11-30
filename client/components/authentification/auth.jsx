@@ -14,7 +14,7 @@ const mapDispatchToProps = dispatch => {
       // dispatching plain actions
       signInUser: data => dispatch(actions.signInUser(data)),
       signUpUser: data => dispatch(actions.signUpUser(data)),
-      updateCredentials: () => dispatch(actions.addInvalidCredentialsActionCreator())
+      updateCredentials: () => dispatch(actions.invalidCredentialsActionCreator())
     }
   }
 
@@ -23,7 +23,8 @@ const Auth = (props) => {
     const {register, handleSubmit, formState: { errors } } = useForm();
     const [needsSignUp, setSignUp] = useState(false);
 
-    const invalidCredentials = useSelector(state => state.users.invalidCredentials);
+    const {status, message} = useSelector(state => state.users.invalidCredentials);
+    console.log(status, message);
     
     // function for handling data from the form for user authentification
     const onLogin = data =>  {
@@ -54,31 +55,34 @@ const Auth = (props) => {
     return (
         <>
             <main className="auth">
-                {!invalidCredentials && !needsSignUp &&
+                {!status && !needsSignUp &&
                 <Login register={register} 
                     loginPic={loginPic} 
                     handleSubmit={handleSubmit} 
                     onLogin={onLogin} />
                 } 
-                {!invalidCredentials && needsSignUp &&
+                {!status && needsSignUp &&
                 <SignUp register={register}
                         loginPic={loginPic}
                         handleSubmit={handleSubmit}
                         onSignUp={onSignUp}
                 />
                 }
-                {invalidCredentials && <UserError sadFace={sadFace} />}
+                {status && <UserError 
+                            message={message}
+                            sadFace={sadFace}
+                            />}
             </main>
             <div className="switch-form">
-                {invalidCredentials && 
+                {status && 
                   <div className="error-buttons">
                     <button onClick={() => handleErrorUser('login')}>Log in </button>
                     <button onClick={() => handleErrorUser('signup')}>Sign up</button>
                   </div>
                 }
-                {!invalidCredentials && !needsSignUp && <p>Don't have an account?</p>}
-                {!invalidCredentials && needsSignUp && <p>Already have an account?</p>}
-                {!invalidCredentials && <button id="switch-sign" onClick={() => handleSetSignUp()}>{textForButton}</button>}
+                {!status && !needsSignUp && <p>Don't have an account?</p>}
+                {!status && needsSignUp && <p>Already have an account?</p>}
+                {!status && <button id="switch-sign" onClick={() => handleSetSignUp()}>{textForButton}</button>}
             </div>
         </>
     );

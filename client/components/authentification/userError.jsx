@@ -1,9 +1,9 @@
 import React from 'react';
 
-const UserError = ({sadFace}) => {
+const UserError = ({sadFace, message}) => {
     return (
         <>
-            <h2 id="error-message">Invalid username or password</h2>
+            <h2 id="error-message">{message}</h2>
             <img id="sad-face" src={sadFace} />
         </>
     )
