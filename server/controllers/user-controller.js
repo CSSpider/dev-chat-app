@@ -19,13 +19,42 @@ friendsController.getUsers = (req, res, next) => {
 };
 
 // create user
-friendsController.createUser = (req, res, next) => {
+friendsController.createUser = async (req, res, next) => {
   // deconstruct user data
-  // we are no-longer requiring first and last name - this will be replaced with email
-  const { username, password, firstName, lastName } = req.body;
-  const values = [username, password, firstName, lastName];
-  res.locals.user = {username: "Dasha"};
-  next();
+  const { username, password, firstName, lastName, email } = req.body;
+  console.log('incoming data', req.body);
+
+  try {
+    const salt_work_factor = 10;
+    console.log('test');
+    const encryptedPW = await bcrypt.hash(password, salt_work_factor);
+
+    console.log('encrypted pw:', password);
+
+    // find the password that matches this username in the DB
+    const query = `INSERT INTO users
+                  (firstname, lastname, username, password, email)
+                  VALUES ($1, $2, $3, $4, $5)`;
+    const params = [firstName, lastName, username, encryptedPW, email];
+
+    const insertResult = await db.query(query, params);
+    console.log('result of insert: ', insertResult.rows[0]);
+
+    // add username to res.locals to send to frontend
+    res.locals.user = {username};
+    next();
+  }
+  catch (err) {
+    console.log('incoming error', err);
+    next({
+      log: 'error in friendsController.createUser',
+      status: 400,
+      message: {err: 'username already in use'}
+    })
+  }
+
+  //res.locals.user = {username: "Dasha"};
+  //next();
   // const CREATE_USER =
   //   'INSERT INTO users (username, password, firstName, lastName) VALUES ($1, $2, $3, $4);';
   // console.log('in createUser middleware');
@@ -41,9 +70,6 @@ friendsController.createUser = (req, res, next) => {
 // verify user
 friendsController.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
-  const values = [username, password];
-
-  console.log('incoming username / pw:', values);
 
   try{
     // find the password that matches this username in the DB
