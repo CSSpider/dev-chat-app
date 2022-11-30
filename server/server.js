@@ -31,24 +31,30 @@ app.use('/users', usersRouter);
 // roucter for news
 app.use('/news', newsRouter);
 
+// test get to signup
+app.get('/signup', (req, res) => {
+  console.log('WORKS!');
+  return res.status(200).json({'test':'it worked!'});
+});
+
 // create new user
 app.post('/signup', friendsController.createUser, (req, res) => {
   console.log('request to /signup');
   console.log('redirect to homepage');
-  res.sendStatus(200);
+  res.status(200);
 });
 
 // login
 app.post('/login', friendsController.verifyUser, (req, res) => {
   console.log('request to /login');
   if (res.locals.user.length === 0) return next({ log: 'invalid login' });
-  res.sendStatus(200);
+  res.status(200);
 });
 
 // not sure what this is for. 
 app.post('/send', friendsController.sendMessage, (req, res) => {
   console.log('post to /send');
-  res.sendStatus(200);
+  res.status(200);
 });
 
 // catch all
