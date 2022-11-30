@@ -16,19 +16,20 @@ const testInsertUserQuery = `
 	INSERT INTO users (firstname, lastname, username, password, email)
  	VALUES ('im', 'admin', 'admin', 'admin', 'admin@gmail.com');
 	`
-
-const selectQuery= `
-	SELECT * FROM users;
-	`
-
-db.query(testInsertUserQuery)
-	.then(data => console.log(data))
-	.catch(err => console.log(err))
-
-// db.query(selectQuery)
+const queryDynamicInsert = `
+	INSERT INTO users (firstname, lastname, username, password, email)
+	VALUES ($1, $2, $3, $4, $5);`
+// db.query(testInsertUserQuery)
 // 	.then(data => console.log(data))
 // 	.catch(err => console.log(err))
 
-db
-  .query('SELECT * FROM users')
-  .then((res) => console.log('user:', res.rows[0]))
+// db.query('SELECT * FROM users')
+// 	.then((res) => console.log('user:', res.rows[0]))
+
+const selectPasswordQuery= `
+	SELECT password FROM users WHERE username='admin';
+	`
+
+db.query(selectPasswordQuery)
+	.then(res => console.log(res.rows[0]))
+
