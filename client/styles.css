@@ -35,11 +35,10 @@ body {
 }
 
 .codebox {
-    background-color: black;
-    color: white;
     width: 45vw;
     justify-content: flex-end;
     margin: 15px;
+    height: 100%;
 }
 
 /* CHATBOX */
