@@ -11,6 +11,7 @@ export function FriendsContainer() {
     }), [])
 
     const userData = useSelector(state => state.users.users);
+    console.log('userData', userData)
     const toRender = [];
 
     userData.forEach(user => {
@@ -19,8 +20,12 @@ export function FriendsContainer() {
 
     return (
         <div className="friendsList">
-            <h3>Friends</h3>
-            <div>{toRender}</div>
+            <div className="header" >
+                <h3 id="friendListHeader">Friends</h3>
+            </div>
+            <div className="friends">
+                {toRender}
+            </div>
         </div>
     )
 }
