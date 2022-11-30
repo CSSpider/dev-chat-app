@@ -9,6 +9,7 @@ export const addMessageActionCreator = message => ({
     payload: message,
   });
 
+
 //load users
 export const fetchAllUsers = () => async dispatch => {
   console.log("dispatch", dispatch)
@@ -25,25 +26,29 @@ export const fetchAllUsers = () => async dispatch => {
 export const signInUser = credentials => async dispatch => {
   // making a fetch request to the backend
   // sending username and password
-  fetch('/login', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({
-        username: credentials.username,
-        password: credentials.password
-      })})
-      .then(response => response.json())
-      .then(data => dispatch({
-        type: types.LOGIN_USER,
-        payload: data.username
-      }))
-      .catch(err => {
-        err;
-      });
-  console.log('Error occured');
+  const response = await fetch('/login', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({
+      username: credentials.username,
+      password: credentials.password
+  })});
+  const data = await response.json();
+  let action = {};
+  if (data.err) {
+    action = addInvalidCredentialsActionCreator();
+  } else {
+    action.type = types.LOGIN_USER,
+    action.payload = data.username
+  }
+  return dispatch(action);
 }
+
+export const addInvalidCredentialsActionCreator = () => ({
+  type: types.USER_ERROR
+});
 
 // sign up user 
 export const signUpUser = credentials => async dispatch => {

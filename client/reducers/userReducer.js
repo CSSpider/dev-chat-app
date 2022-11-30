@@ -1,7 +1,8 @@
 import * as types from '../constants/actionTypes'
 
 const initialState = {
-    currentUser: 'hey',
+    currentUser: '',
+    invalidCredentials: false,
     users: []
 }
 
@@ -26,6 +27,14 @@ const userReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser
+            }
+
+        case types.USER_ERROR:
+            console.log('in error user');
+            const invalidCredentials = state.invalidCredentials ? false : true;
+            return {
+                ...state,
+                invalidCredentials
             }
 
         case types.LOAD_USERS:

@@ -73,7 +73,7 @@ form {
     align-items: center;
 }
 
-.switch-form button {
+#switch-sign {
     height: 50px;
     border: none;
     border-left: 1px solid rgb(243, 76, 181);
@@ -84,7 +84,7 @@ form {
     transition: color 0.7s;
 }
 
-.switch-form button:hover {
+#switch-sign:hover, .error-buttons button:hover {
     cursor: pointer;
     color: rgb(243, 76, 181);
 
@@ -104,4 +104,34 @@ input[type="submit"] {
 input[type="submit"]:hover {
     background-color: rgb(223, 56, 161);
     cursor: pointer;
+}
+
+#error-message {
+    margin-top: 100px;
+}
+
+#sad-face {
+    margin-bottom: 100px;
+    width: 150px;
+}
+
+.error-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.error-buttons button {
+    height: 50px;
+    border: none;
+    background-color: rgb(33, 34, 40);
+    color: rgb(221, 221, 221);
+    font-size: 18px;
+    padding-left: 10px;
+    transition: color 0.7s;
+    text-align: center;
+    width: 220px;
+}
+
+.error-buttons button:first-of-type {
+    border-right: 1px solid rgb(243, 76, 181);
 }
