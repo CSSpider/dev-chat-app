@@ -1,6 +1,6 @@
 const { Pool } = require('pg');
 
-const PG_URI = require('../../credentials.js')
+const PG_URI = require('../../credential.js')
 
 const pool = new Pool({
   connectionString: PG_URI,

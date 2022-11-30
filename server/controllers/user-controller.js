@@ -26,10 +26,7 @@ friendsController.createUser = async (req, res, next) => {
 
   try {
     const salt_work_factor = 10;
-    console.log('test');
     const encryptedPW = await bcrypt.hash(password, salt_work_factor);
-
-    console.log('encrypted pw:', password);
 
     // find the password that matches this username in the DB
     const query = `INSERT INTO users
@@ -49,27 +46,15 @@ friendsController.createUser = async (req, res, next) => {
     next({
       log: 'error in friendsController.createUser',
       status: 400,
-      message: {err: 'username already in use'}
+      message: {err: 'username or emial already in use'}
     })
   }
-
-  //res.locals.user = {username: "Dasha"};
-  //next();
-  // const CREATE_USER =
-  //   'INSERT INTO users (username, password, firstName, lastName) VALUES ($1, $2, $3, $4);';
-  // console.log('in createUser middleware');
-  // db.query(CREATE_USER, values)
-  //   .then((response) => {
-  //     return next();
-  //   })
-  //   .catch((err) => {
-  //     return next({ err });
-  //   });
 };
 
 // verify user
 friendsController.verifyUser = async (req, res, next) => {
   const { username, password } = req.body;
+  console.log('incoming data', req.body);
 
   try{
     // find the password that matches this username in the DB
