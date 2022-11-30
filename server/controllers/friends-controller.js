@@ -23,16 +23,18 @@ friendsController.createUser = (req, res, next) => {
   // we are no-longer requiring first and last name - this will be replaced with email
   const { username, password, firstName, lastName } = req.body;
   const values = [username, password, firstName, lastName];
-  const CREATE_USER =
-    'INSERT INTO users (username, password, firstName, lastName) VALUES ($1, $2, $3, $4);';
-  console.log('in createUser middleware');
-  db.query(CREATE_USER, values)
-    .then((response) => {
-      return next();
-    })
-    .catch((err) => {
-      return next({ err });
-    });
+  res.locals.user = {username: "Dasha"};
+  next();
+  // const CREATE_USER =
+  //   'INSERT INTO users (username, password, firstName, lastName) VALUES ($1, $2, $3, $4);';
+  // console.log('in createUser middleware');
+  // db.query(CREATE_USER, values)
+  //   .then((response) => {
+  //     return next();
+  //   })
+  //   .catch((err) => {
+  //     return next({ err });
+  //   });
 };
 
 // verify user
