@@ -1,0 +1,84 @@
+* {
+    margin: 0;
+}
+
+.homepageContainer {
+    border: 3px;
+    background-color: blue;
+}
+
+#friendsContainer {
+    background-color: salmon;
+}
+
+.auth {
+    border-radius: 10px;
+    width: 450px;
+    height: 500px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: rgb(33, 34, 40);
+    color: rgb(243, 76, 181);
+}
+
+form {
+    margin-bottom: 0;
+}
+
+.auth div {
+    text-align: center;
+}
+
+.auth img {
+    width: 200px;
+}
+
+.auth-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 100px;
+    background-color: rgb(22, 22, 26);
+    width: 100vw;
+    height: 100vh;
+}
+
+.auth-input {
+    display: block;
+    width: 450px;
+    height: 50px;
+    background-color: rgb(33, 34, 40);
+    color: rgb(221, 221, 221);
+    font-size: 20px;
+    border: none;
+    border-bottom: 1px solid rgb(221, 221, 221);
+}
+
+.switch-form {
+    background-color: rgb(33, 34, 40);
+    margin-top: 30px;
+    color: rgb(221, 221, 221);
+    width: 450px;
+    height: 50px;
+    border-radius: 10px;
+    text-align: center;
+}
+
+
+input:first-of-type {
+    border-top: 1px solid rgb(221, 221, 221);
+}
+
+input[type="submit"] {
+    border-bottom: none;
+    background-color: rgb(243, 76, 181);
+    border-radius: 0 0 10px 10px;
+}
+
+input[type="submit"]:hover {
+    background-color: rgb(223, 56, 161);
+    cursor: pointer;
+}

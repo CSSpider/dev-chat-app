@@ -1,12 +1,11 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-
-// dotENV
-require('dotenv').config();
+const dotenv = require('dotenv');
 
 // port
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
+// console.log('this is URI',process.env.URI)
 
 // require in our routers
 const usersRouter = require('./routes/users');
@@ -42,7 +41,7 @@ app.post('/signup', friendsController.createUser, (req, res) => {
 app.post('/login', friendsController.verifyUser, (req, res) => {
   console.log('request to /login');
   if (res.locals.user.length === 0) return next({ log: 'invalid login' });
-  res.sendStatus(200);
+  return res.status(200).json(res.locals.user);
 });
 
 // not sure what this is for. 
