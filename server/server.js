@@ -1,12 +1,11 @@
 const express = require('express');
 const app = express();
 const path = require('path');
-
-// dotENV
-require('dotenv').config();
+const dotenv = require('dotenv');
 
 // port
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
+// console.log('this is URI',process.env.URI)
 
 // require in our routers
 const usersRouter = require('./routes/users');

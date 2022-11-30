@@ -1,4 +1,4 @@
-const db = require('../models/friends-model');
+const db = require('../models/database');
 
 const friendsController = {};
 
