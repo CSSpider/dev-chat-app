@@ -7,6 +7,8 @@ const client = new WebSocket('ws://localhost:3002');
 
 // imports
 import {codeChangeActionCreator} from '../actions/action-creators';
+import {newUserEnterActionCreator} from '../actions/action-creators';
+
 
 function ChatContainer (props) {
   
@@ -36,7 +38,8 @@ function ChatContainer (props) {
 
     // else check if message is for the codebox
     if (message.type === 'login') {
-      dispatch(codeChangeActionCreator(message.body))
+      console.log('type - login', message.sender)
+      dispatch(newUserEnterActionCreator(message.sender))
     }
   }
 

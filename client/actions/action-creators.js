@@ -10,18 +10,6 @@ export const addMessageActionCreator = message => ({
   });
 
 
-//load users
-export const fetchAllUsers = () => async dispatch => {
-  console.log("dispatch", dispatch)
-  const response = await fetch ('/users')
-  const parsedResponse = await response.json();
-  console.log('payload is:', parsedResponse)
-  return {
-    type: types.LOAD_USERS,
-    payload: parsedResponse
-  }
-}
-
 //login user
 export const signInUser = credentials => async dispatch => {
   // making a fetch request to the backend
@@ -84,6 +72,14 @@ export const codeChangeActionCreator = codeBody => {
     type: types.UPDATE_CODEVIEW,
     payload: codeBody
   });
+}
+
+// new user signin
+export const newUserEnterActionCreator = newUser => {
+  return ({
+    type: types.ADD_CURRENT_USER,
+    payload: newUser
+  })
 }
 
 //load messages
