@@ -6,11 +6,11 @@ function MessageContainer(props) {
     console.log('props', props)
     // const messages = useSelector(state => state.messages)
     return (
-        <div>
-            <div className="{sender}">
+        <div className={props.direction}>
+            <div className={props.className}>
                 {props.sender}
             </div>
-            <div className="messageContainer">
+            <div className={props.boxType}>
                 <div className={props.className}>
                 {props.message}
                 </div>

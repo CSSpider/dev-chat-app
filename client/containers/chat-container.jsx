@@ -29,6 +29,9 @@ function ChatContainer (props) {
       setChatMessages((prev) => [...prev, message]);
     }
 
+    console.log('-- MESSAGE LOG --', message);
+    console.log('--- SENDER ---', chatMessages.sender);
+
     // else check if message is for the codebox
     if (message.type === 'code') {
       dispatch(codeChangeActionCreator(message.body))
@@ -58,10 +61,15 @@ function ChatContainer (props) {
   let chat = [];
   for (let i = 0; i < chatMessages.length; i++) {
     let className = 'client';
-    console.log('HIT')
-    console.log('chatMessages.sender', chatMessages.sender);
-    chatMessages.sender !== sender ? className = 'friend' : className = 'client';
-    chat.push(<MessageContainer sender={username} message={chatMessages[i].body} className={className}/>);
+    chatMessages.sender !== username ? className = 'sender' : className = 'client';
+    chat.push(
+      <MessageContainer 
+      key={i} 
+      sender={chatMessages[i].sender} 
+      message={chatMessages[i].body} 
+      direction ={chatMessages[i].sender === username ? 'sentMsg' : 'msgRec'} 
+      className={chatMessages[i].sender === username ? 'sender' : 'reciever'}
+      boxType={chatMessages[i].sender === username ? 'messageContainerSend' : 'messageContainerRec'}/>);
   }
 
   return (
