@@ -1,6 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import CodeMirror from "@uiw/react-codemirror";
+import { okaidia } from '@uiw/codemirror-theme-okaidia';
 import { javascript } from "@codemirror/lang-javascript";
 
 const client = new WebSocket('ws://localhost:3002');
@@ -30,7 +31,7 @@ function Codebox() {
             <CodeMirror onChange={sendCodeContent}
             value={codeContent}
             height="95%"
-            // theme={okaidia}
+            theme={okaidia}
             extensions={[javascript({ jsx: true })]}
             //onChange={onChange}
             // readOnly="nocursor"
