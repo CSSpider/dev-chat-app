@@ -33,7 +33,7 @@ const App = () => {
         <div>
       
           <Navbar />
-          <Display />
+          <Display displayNews={displayNews} />
         
         </div>}
       {!username && <div className="auth-container"><Auth /></div>}
