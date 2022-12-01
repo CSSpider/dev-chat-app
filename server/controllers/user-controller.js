@@ -1,6 +1,7 @@
 const db = require('../models/database');
 const bcrypt = require('bcrypt');
 
+
 const friendsController = {};
 
 // why is this here? we dont need this.

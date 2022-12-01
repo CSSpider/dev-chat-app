@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+
 
 // port
 const PORT = 3000;
@@ -13,6 +15,7 @@ const newsRouter = require('./routes/news');
 
 // controllers
 const friendsController = require('./controllers/user-controller');
+const sessionController = require('./controllers/session-controller')
 
 //handle incoming requests
 app.use(express.json());
@@ -25,23 +28,36 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-// routher for users
+app.use(cookieParser());
+
+// router for users
 app.use('/users', usersRouter);
-// roucter for news
+// router for news
 app.use('/news', newsRouter);
 
 // create new user
-app.post('/signup', friendsController.createUser, (req, res) => {
+app.post('/signup', 
+  friendsController.createUser, 
+  sessionController.setSSIDCookie, 
+  sessionController.startSession, 
+  (req, res) => {
   console.log('request to /signup');
   console.log('redirect to homepage');
   return res.status(200).json(res.locals.user);
 });
 
 // login
-app.post('/login', friendsController.verifyUser, (req, res) => {
-  if (res.locals.user.length === 0) return next({ log: 'invalid login' });
+app.post('/login', 
+  friendsController.verifyUser, 
+  sessionController.setSSIDCookie, 
+  sessionController.startSession, 
+  (req, res) => {
+    if (res.locals.user.length === 0) return next({ log: 'invalid login' });
   return res.status(200).json(res.locals.user);
 });
+
+// check if user is in session
+// app.get('/inSess')
 
 // not sure what this is for. 
 app.post('/send', friendsController.sendMessage, (req, res) => {
