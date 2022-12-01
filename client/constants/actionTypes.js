@@ -10,3 +10,7 @@ export const UPDATE_CODEVIEW = 'UPDATE_CODEVIEW'
 
 // action for adding current user
 export const ADD_CURRENT_USER = 'ADD_CURRENT_USER'
+
+// action for displaying news
+export const DISPLAY_NEWS = 'DISPLAY_NEWS'
+export const GET_NEWS = 'GET_NEWS'

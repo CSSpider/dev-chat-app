@@ -5,6 +5,15 @@ import User from "../components/User"
 
 export function FriendsContainer() {
     
+    const dispatch = useDispatch();
+    useEffect( () => {
+        const func = async() => {
+            const res = await fetchAllUsers()();
+            dispatch(res);
+        }
+        func();
+    }, []);
+
     const userData = useSelector(state => state.users.users);
     //const toRender = [];
     const nameList = [];
