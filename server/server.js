@@ -42,6 +42,12 @@ app.use('/users', usersRouter);
 // router for news
 app.use('/news', newsRouter);
 
+// test get to signup
+app.get('/signup', (req, res) => {
+  console.log('WORKS!');
+  return res.status(200).json({'test':'it worked!'});
+});
+
 // create new user
 app.post('/signup', 
   friendsController.createUser, 
@@ -67,7 +73,7 @@ app.post('/login',
 // not sure what this is for. 
 app.post('/send', friendsController.sendMessage, (req, res) => {
   console.log('post to /send');
-  res.sendStatus(200);
+  res.status(200);
 });
 
 // catch all

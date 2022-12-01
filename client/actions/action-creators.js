@@ -10,6 +10,12 @@ export const addMessageActionCreator = message => ({
   });
 
 
+// update username
+export const setSession = username =>({
+  type: types.LOGIN_USER,
+  payload: username
+})
+
 //login user
 export const signInUser = credentials => async dispatch => {
   // making a fetch request to the backend
