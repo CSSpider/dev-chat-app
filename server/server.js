@@ -1,23 +1,33 @@
 const express = require('express');
 const app = express();
 const path = require('path');
+const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
 
-// dotENV
-require('dotenv').config();
 
 // port
-const PORT = process.env.PORT || 3000;
+const PORT = 3000;
+// console.log('this is URI',process.env.URI)
 
 // require in our routers
 const usersRouter = require('./routes/users');
 const newsRouter = require('./routes/news');
 
 // controllers
-const friendsController = require('./controllers/friends-controller');
+const friendsController = require('./controllers/user-controller');
+const sessionController = require('./controllers/session-controller')
 
 //handle incoming requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// check if user is in session
+app.get('/insess',
+  sessionController.isLoggedIn,
+  (req, res) => {
+    return res.status(200).json(res.locals.user);
+  })
 
 // send static files, when requeted from / endpoint
 app.get('/', (req, res) => {
@@ -26,9 +36,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-// routher for users
+
+// router for users
 app.use('/users', usersRouter);
-// roucter for news
+// router for news
 app.use('/news', newsRouter);
 
 // test get to signup
@@ -38,18 +49,26 @@ app.get('/signup', (req, res) => {
 });
 
 // create new user
-app.post('/signup', friendsController.createUser, (req, res) => {
+app.post('/signup', 
+  friendsController.createUser, 
+  sessionController.setSSIDCookie, 
+  sessionController.startSession, 
+  (req, res) => {
   console.log('request to /signup');
   console.log('redirect to homepage');
-  res.status(200);
+  return res.status(200).json(res.locals.user);
 });
 
 // login
-app.post('/login', friendsController.verifyUser, (req, res) => {
-  console.log('request to /login');
-  if (res.locals.user.length === 0) return next({ log: 'invalid login' });
-  res.status(200);
+app.post('/login', 
+  friendsController.verifyUser, 
+  sessionController.setSSIDCookie, 
+  sessionController.startSession,
+  (req, res) => {
+    if (res.locals.user.length === 0) return next({ log: 'invalid login' });
+    return res.status(200).json(res.locals.user);
 });
+
 
 // not sure what this is for. 
 app.post('/send', friendsController.sendMessage, (req, res) => {
