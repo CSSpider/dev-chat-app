@@ -1,14 +1,19 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
+import * as actions from "../actions/action-creators";
 
+const Navbar = props=> {
+    //use disptach here
+    // pass action creator to the disptach
+      // dispatcher for news
+    const dispatch = useDispatch();
+    const displayAction = actions.newsActionCreator;
 
-function Navbar() {
-    // const messages = useSelector(state => state.messages)
     return (
         <div className="navbar">
             <ul>
-                <li>Option 1</li>
-                <li>Option 2</li>
+                <li onClick={() => dispatch(displayAction('toNews'))} >Top Tech News</li>
+                <li onClick={() => dispatch(displayAction('toChat'))}>Chat</li>
                 <li>Option 3</li>
             </ul>
         </div>

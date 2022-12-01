@@ -5,10 +5,13 @@ import { fetchAllUsers } from "../actions/action-creators";
 
 export function FriendsContainer() {
     const dispatch = useDispatch();
-    useEffect((async () => {
-        const res = await fetchAllUsers()();
-        dispatch(res);
-    }), [])
+    useEffect( () => {
+        const func = async() => {
+            const res = await fetchAllUsers()();
+            dispatch(res);
+        }
+        func();
+    }, []);
 
     const userData = useSelector(state => state.users.users);
     console.log('userData', userData)
