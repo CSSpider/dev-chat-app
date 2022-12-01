@@ -317,3 +317,8 @@ input[type="submit"]:hover {
 .error-buttons button:first-of-type {
     border-right: 1px solid var(--main-pink-color);
 }
+
+.news-container {
+    height: 100vh;
+    width: 100vw;
+}

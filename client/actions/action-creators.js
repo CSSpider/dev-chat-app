@@ -63,7 +63,6 @@ export const invalidCredentialsActionCreator = str => ({
 
 // sign up user 
 export const signUpUser = credentials => async dispatch => {
-  console.log('sign up in dispatch')
   try {
     const response = await fetch('/signup', {
       method: 'POST',
@@ -101,15 +100,27 @@ export const codeChangeActionCreator = codeBody => {
 }
 
 // get news
-export const newsActionCreator = () => {
+export const newsActionCreator = (str) => {
   return ({
-    type: types.DISPLAY_NEWS
+    type: types.DISPLAY_NEWS,
+    payload: str
   })
 }
 
 // getting news with fetch requests
-export const getNewsActionCreator = () => {
-
+export const getNewsActionCreator = () => async dispatch =>  {
+  console.log('in news');
+  try {
+    const response = await fetch('/news');
+    const data = await response.json();
+    console.log(data);
+    return dispatch({
+      type: types.GET_NEWS,
+      payload: data
+    });
+  } catch(err) {
+    console.log(err);
+  }
 }
 
 //load messages

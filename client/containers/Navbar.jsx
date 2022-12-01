@@ -12,8 +12,8 @@ const Navbar = props=> {
     return (
         <div className="navbar">
             <ul>
-                <li onClick={() => dispatch(displayAction())} >Top Tech News</li>
-                <li onClick={() => dispatch(displayAction())}>Chat</li>
+                <li onClick={() => dispatch(displayAction('toNews'))} >Top Tech News</li>
+                <li onClick={() => dispatch(displayAction('toChat'))}>Chat</li>
                 <li>Option 3</li>
             </ul>
         </div>

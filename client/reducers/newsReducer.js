@@ -8,10 +8,17 @@ const initialState = {
 const newsReducer = (state = initialState, action) => {
     switch (action.type) {
         case types.DISPLAY_NEWS:
-            const display = state.display ? false : true;
+            console.log(action);
+            const display = action.payload === 'toNews' ? true : false;
             return {
                 ...state,
                 display
+            }
+        case types.GET_NEWS:
+            const news = action.payload;
+            return {
+                ...state,
+                news
             }
         default: 
             return state;
