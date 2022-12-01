@@ -12,7 +12,7 @@ import "./styles.css";
 const App = () => {
 
   const username = useSelector(state => state.users.currentUser);
-     
+  console.log('username App.js', username); 
   return (
     <>
       {username &&
