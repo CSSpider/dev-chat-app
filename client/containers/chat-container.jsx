@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MessageContainer from './message-container';
 
@@ -7,10 +7,14 @@ const client = new WebSocket('ws://localhost:3002');
 
 // imports
 import {codeChangeActionCreator} from '../actions/action-creators';
+import {newUserEnterActionCreator} from '../actions/action-creators';
+
 
 function ChatContainer (props) {
   
+  const allUsers = useSelector(state => state.users.users);
   const username = useSelector(state => state.users.currentUser);
+
   console.log('current User:', username);
   const [input, setInput] = useState('');
   const [sender, setUsername] = useState(username); // will come from redux
@@ -33,10 +37,25 @@ function ChatContainer (props) {
     if (message.type === 'code') {
       dispatch(codeChangeActionCreator(message.body))
     }
+
+    // else check if message is for the codebox
+    if (message.type === 'login') {
+      console.log('type - login', message.allUsers)
+      dispatch(newUserEnterActionCreator(message.allUsers))
+    }
   }
 
   // maybe this should be moved, this has to do with code change dispatching //
   const dispatch = useDispatch();
+
+  function loginToFriendList() {
+    const messageObj = {
+      type: 'login',
+      allUsers: [sender, ...allUsers]
+    }
+    console.log('messageObj in Submit: ', messageObj);
+    client.send(JSON.stringify(messageObj));
+  }
     
   function submit() {
     // console.log('pressed!');
@@ -49,12 +68,18 @@ function ChatContainer (props) {
     }
     console.log('messageObj in Submit: ', messageObj);
     client.send(JSON.stringify(messageObj));
+
+    // resetnd list of signed in folks
+    loginToFriendList();
   }
 
   function readInput(e) {
     setInput((prev) => e.target.value)
   }
 
+  useEffect(()=>{
+    loginToFriendList();
+  },[])
   // clears the input field after the message has been submitted
   function clearText() {
     document.getElementById('userText').value = '';

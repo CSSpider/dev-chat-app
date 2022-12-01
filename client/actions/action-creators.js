@@ -10,18 +10,6 @@ export const addMessageActionCreator = message => ({
   });
 
 
-//load users
-export const fetchAllUsers = () => async dispatch => {
-  console.log("dispatch", dispatch)
-  const response = await fetch ('/users')
-  const parsedResponse = await response.json();
-  console.log('payload is:', parsedResponse)
-  return {
-    type: types.LOAD_USERS,
-    payload: parsedResponse
-  }
-}
-
 // update username
 export const setSession = username =>({
   type: types.LOGIN_USER,
@@ -97,6 +85,14 @@ export const codeChangeActionCreator = codeBody => {
     type: types.UPDATE_CODEVIEW,
     payload: codeBody
   });
+}
+
+// new user signin
+export const newUserEnterActionCreator = newUser => {
+  return ({
+    type: types.ADD_CURRENT_USER,
+    payload: newUser
+  })
 }
 
 // get news
