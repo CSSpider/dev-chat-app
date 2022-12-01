@@ -1,26 +1,34 @@
-import React, { useEffect } from 'react';
-import ChatContainer from './containers/chat-container';
-import  MessageContainer from './containers/message-container';
-import { FriendsContainer } from './containers/friends-list-container';
+import React, { useState, useEffect } from 'react';
 import Navbar from './containers/Navbar';
 import Display from './containers/Display';
-// import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import * as actions from "./actions/action-creators";
 import { useSelector, useDispatch } from "react-redux";
 import Auth from './components/authentification/auth';
 
 const App = () => {
+  const dispatch = useDispatch();
+  const setSession = actions.setSession;
+
+
+  useEffect( () => {
+    const func = async() => {
+      const response = await fetch('/insess');
+      const data = await response.json();
+      if (data.isLoggedIn) {
+        dispatch(setSession(data.username));
+      }
+    }
+    func();
+  });
 
   const username = useSelector(state => state.users.currentUser);
-  console.log('username App.js', username); 
+
   return (
     <>
       {username &&
         <div>
-          
-          {/* <FriendsContainer/> */}
-          {/* <ChatContainer/> */}
+      
           <Navbar />
-          {/* {username} */}
           <Display />
           
         </div>}
