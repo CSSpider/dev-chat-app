@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MessageContainer from './message-container';
 
@@ -33,10 +33,24 @@ function ChatContainer (props) {
     if (message.type === 'code') {
       dispatch(codeChangeActionCreator(message.body))
     }
+
+    // else check if message is for the codebox
+    if (message.type === 'login') {
+      dispatch(codeChangeActionCreator(message.body))
+    }
   }
 
   // maybe this should be moved, this has to do with code change dispatching //
   const dispatch = useDispatch();
+
+  function loginToFriendList() {
+    const messageObj = {
+      type: 'login',
+      sender
+    }
+    console.log('messageObj in Submit: ', messageObj);
+    client.send(JSON.stringify(messageObj));
+  }
     
   function submit() {
     // console.log('pressed!');
@@ -54,6 +68,10 @@ function ChatContainer (props) {
   function readInput(e) {
     setInput((prev) => e.target.value)
   }
+
+  useEffect(()=>{
+    loginToFriendList();
+  },[])
 
   let chat = [];
   for (let i = 0; i < chatMessages.length; i++) {
