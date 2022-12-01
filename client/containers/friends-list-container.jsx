@@ -14,9 +14,9 @@ export function FriendsContainer() {
     //let userIndex = 0;
     userData.forEach(user => {
         // userIndex++;
-        // console.log('adding to user pool:', user);
+        console.log('adding to user pool:', user);
         // toRender.push( <User username={user} key={userIndex}/> );
-        nameList.push(user);
+        nameList.push(<div className='signedInUser'>{user}</div>);
     });
 
     // useEffect(()=> {
@@ -29,7 +29,9 @@ export function FriendsContainer() {
                 <h2 id="friendListHeader">In Chat</h2>
             </div>
             <div className="friends">
-                {nameList}
+                <div className="inSession">
+                    {nameList}
+                </div>
                 {/* {toRender} */}
             </div>
         </div>

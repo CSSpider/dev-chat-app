@@ -12,7 +12,9 @@ import {newUserEnterActionCreator} from '../actions/action-creators';
 
 function ChatContainer (props) {
   
+  const allUsers = useSelector(state => state.users.users);
   const username = useSelector(state => state.users.currentUser);
+
   console.log('current User:', username);
   const [input, setInput] = useState('');
   const [sender, setUsername] = useState(username); // will come from redux
@@ -38,8 +40,8 @@ function ChatContainer (props) {
 
     // else check if message is for the codebox
     if (message.type === 'login') {
-      console.log('type - login', message.sender)
-      dispatch(newUserEnterActionCreator(message.sender))
+      console.log('type - login', message.allUsers)
+      dispatch(newUserEnterActionCreator(message.allUsers))
     }
   }
 
@@ -49,7 +51,7 @@ function ChatContainer (props) {
   function loginToFriendList() {
     const messageObj = {
       type: 'login',
-      sender
+      allUsers: [sender, ...allUsers]
     }
     console.log('messageObj in Submit: ', messageObj);
     client.send(JSON.stringify(messageObj));
@@ -66,6 +68,9 @@ function ChatContainer (props) {
     }
     console.log('messageObj in Submit: ', messageObj);
     client.send(JSON.stringify(messageObj));
+
+    // resetnd list of signed in folks
+    loginToFriendList();
   }
 
   function readInput(e) {
