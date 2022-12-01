@@ -17,8 +17,6 @@ function ChatContainer (props) {
   const [receiver, setFriendName] = useState('kevindooley'); // will come from redux
   const [chatMessages, setChatMessages] = useState([]); // will come from redux
 
-    console.log('chatMessages', chatMessages);
-
   client.onmessage = (event) => {
     // parse incoming message event from the socket
     const message = JSON.parse(event.data);
@@ -28,6 +26,8 @@ function ChatContainer (props) {
     if (message.type === 'chat') {
       setChatMessages((prev) => [...prev, message]);
     }
+
+    console.log('--- userTextValue ---',document.getElementById('userText').value)
 
     // else check if message is for the codebox
     if (message.type === 'code') {
@@ -55,21 +55,39 @@ function ChatContainer (props) {
     setInput((prev) => e.target.value)
   }
 
+  // clears the input field after the message has been submitted
+  function clearText() {
+    document.getElementById('userText').value = '';
+  }
+
+  // sends the message when the user presses enter
+  function handleKeypress(e){
+    if(e.keyCode === 13 && document.getElementById('userText').value !== '') {
+      submit();
+      document.getElementById('userText').value = '';
+    }
+  }
+
   let chat = [];
   for (let i = 0; i < chatMessages.length; i++) {
     let className = 'client';
-    console.log('HIT')
-    console.log('chatMessages.sender', chatMessages.sender);
-    chatMessages.sender !== sender ? className = 'friend' : className = 'client';
-    chat.push(<MessageContainer sender={username} message={chatMessages[i].body} className={className}/>);
+    chatMessages.sender !== username ? className = 'sender' : className = 'client';
+    chat.push(
+      <MessageContainer 
+      key={i} 
+      sender={chatMessages[i].sender} 
+      message={chatMessages[i].body} 
+      direction ={chatMessages[i].sender === username ? 'sentMsg' : 'msgRec'} 
+      className={chatMessages[i].sender === username ? 'sender' : 'reciever'}
+      boxType={chatMessages[i].sender === username ? 'messageContainerSend' : 'messageContainerRec'}/>);
   }
 
   return (
     <div className='chatbox-container'>
         <div id="chat">{chat}</div>
         <div id="msgAndSendBtn" style={{display: "flex"}}>
-          <textarea onChange={readInput} placeholder="Message" />
-          <div id="sendBtn"><button onClick={submit}>Send</button></div>
+          <textarea id="userText" onChange={readInput} placeholder="Message" onKeyDown={handleKeypress} />
+          <div id="sendBtn"><button onClick={function(e){submit(); clearText()}} >Send</button></div>
         </div>
     </div>
   )
@@ -77,15 +95,3 @@ function ChatContainer (props) {
 
 export default ChatContainer;
 
-/*
-import { useSelector, useDispatch } from "react-redux";
-
-export function FriendsContainer() {
-    const dispatch = useDispatch();
-    useEffect((async () => {
-        const res = await fetchAllUsers()();
-        dispatch(res);
-    }), [])
-
-    const userData = useSelector(state => state.users.users);
-    */

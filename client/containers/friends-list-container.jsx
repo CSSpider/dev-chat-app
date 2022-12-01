@@ -28,6 +28,7 @@ export function FriendsContainer() {
             </div>
             <div className="friends">
                 {toRender}
+                {console.log(toRender)}
             </div>
         </div>
     )
