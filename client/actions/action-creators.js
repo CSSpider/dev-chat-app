@@ -78,6 +78,14 @@ export const signUpUser = credentials => async dispatch => {
   return dispatch(action);
 }
 
+// sign up user 
+export const codeChangeActionCreator = codeBody => {
+  return ({
+    type: types.UPDATE_CODEVIEW,
+    payload: codeBody
+  });
+}
+
 //load messages
 /*
 export const fetchMessages = (user, friend) => async (dispatch) => {
