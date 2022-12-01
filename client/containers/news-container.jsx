@@ -1,13 +1,13 @@
 import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 
-export function NewsContainer() {
+const News = () => {
     //get news data from state
-    const newsData = useSelector(state => state.news);
-    const toRender = [];
+   // const newsData = useSelector(state => state.news);
     return (
         <div>
-            {toRender}
         </div>
     )
 }
+
+export default News;

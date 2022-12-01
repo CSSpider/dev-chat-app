@@ -86,6 +86,13 @@ export const codeChangeActionCreator = codeBody => {
   });
 }
 
+// get news
+export const newsActionCreator = () => {
+  return ({
+    type: types.DISPLAY_NEWS
+  })
+}
+
 //load messages
 /*
 export const fetchMessages = (user, friend) => async (dispatch) => {

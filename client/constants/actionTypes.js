@@ -8,3 +8,7 @@ export const USER_ERROR = 'USER_ERROR'
 
 // action for code edditor
 export const UPDATE_CODEVIEW = 'UPDATE_CODEVIEW'
+
+
+// action for displaying news
+export const DISPLAY_NEWS = 'DISPLAY_NEWS'
