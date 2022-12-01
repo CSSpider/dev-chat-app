@@ -20,6 +20,14 @@ const sessionController = require('./controllers/session-controller')
 //handle incoming requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// check if user is in session
+app.get('/insess',
+  sessionController.isLoggedIn,
+  (req, res) => {
+    return res.status(200).json(res.locals.user);
+  })
 
 // send static files, when requeted from / endpoint
 app.get('/', (req, res) => {
@@ -28,7 +36,6 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-app.use(cookieParser());
 
 // router for users
 app.use('/users', usersRouter);
@@ -50,14 +57,12 @@ app.post('/signup',
 app.post('/login', 
   friendsController.verifyUser, 
   sessionController.setSSIDCookie, 
-  sessionController.startSession, 
+  sessionController.startSession,
   (req, res) => {
     if (res.locals.user.length === 0) return next({ log: 'invalid login' });
-  return res.status(200).json(res.locals.user);
+    return res.status(200).json(res.locals.user);
 });
 
-// check if user is in session
-// app.get('/inSess')
 
 // not sure what this is for. 
 app.post('/send', friendsController.sendMessage, (req, res) => {
