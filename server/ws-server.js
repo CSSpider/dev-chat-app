@@ -9,14 +9,15 @@ const ws = require('ws');
 
 const wsServer = new ws.Server({ noServer: true });
 
-// when the web socket connects it will...
 wsServer.on('connection', (socket) => {
-  // have a listenener that watches for new messages.
+  // console.log('ws server clients ', wsServer.clients)
+  // console.log('wsServer: ', wsServer )
   socket.on('message', (message) => {
-    console.log('new message recieved on socket backend')
+    // message = message.json();
+    // console.log('message: %s', message);
     const parsedMessage = JSON.parse(message);
     console.log('parsedMessage in wsServer %s', parsedMessage);
-    // delegate the message to each client
+    // console.log('message %s', parsedMessage.body);
     wsServer.clients.forEach((client) => client.send(message.toString()));
     addMessage(parsedMessage);
   });

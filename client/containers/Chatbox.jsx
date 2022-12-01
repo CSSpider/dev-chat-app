@@ -8,7 +8,7 @@ function Chatbox() {
     // const messages = useSelector(state => state.messages)
     return (
         <div className="chatbox">
-            {/* <ChatPartner /> */}
+            <ChatPartner />
             <ChatContainer />
         </div>
     )

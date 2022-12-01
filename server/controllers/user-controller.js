@@ -65,9 +65,7 @@ friendsController.verifyUser = async (req, res, next) => {
 
     console.log('pw input:', password, 'ps in db', result.rows[0].password);
 
-    let pwcompare = await bcrypt.compare(password, result.rows[0].password);
-
-    console.log('pwcompare results ok?', pwcompare);
+    const pwcompare = await bcrypt.compare(password, result.password);
 
     // if nothing is found, OR password username mismatch, throw error
     if (result.rows[0] === undefined || !pwcompare) throw 'Wrong username or password';
@@ -110,26 +108,20 @@ friendsController.getMessages = (req, res, next) => {
 
 // meant for chat history?
 friendsController.sendMessage = (req, res, next) => {
-  /*
-  console.log("SEND MESSAGES");
   console.log('in sendMessage, req.body =', req.body);
   const { sender, receiver, body } = req.body;
   console.log('request sender', sender);
   const values = [sender, receiver, body];
-  console.log(values);
   const SEND_MESSAGE =
     'INSERT INTO messages (sender, receiver, body) VALUES ($1, $2, $3);';
   db.query(SEND_MESSAGE, values)
     .then((response) => {
-      console.log('query success A+');
       return next();
     })
     .catch((err) => {
       console.log('caught error in sendMessage');
       return next({ err });
     });
-    */
-   return next();
 };
 
 module.exports = friendsController;
