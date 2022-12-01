@@ -7,7 +7,7 @@ function MessageContainer(props) {
     // const messages = useSelector(state => state.messages)
     return (
         <div>
-            <div className="sender">
+            <div className="{sender}">
                 {props.sender}
             </div>
             <div className="messageContainer">

@@ -10,8 +10,6 @@ export function FriendsContainer() {
         dispatch(res);
     }), [])
 
-    
-
     const userData = useSelector(state => state.users.users);
     console.log('userData', userData)
     const toRender = [];
