@@ -2,6 +2,8 @@ const express = require('express');
 const app = express();
 const path = require('path');
 const dotenv = require('dotenv');
+const cookieParser = require('cookie-parser');
+
 
 // port
 const PORT = 3000;
@@ -13,10 +15,19 @@ const newsRouter = require('./routes/news');
 
 // controllers
 const friendsController = require('./controllers/user-controller');
+const sessionController = require('./controllers/session-controller')
 
 //handle incoming requests
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+app.use(cookieParser());
+
+// check if user is in session
+app.get('/insess',
+  sessionController.isLoggedIn,
+  (req, res) => {
+    return res.status(200).json(res.locals.user);
+  })
 
 // send static files, when requeted from / endpoint
 app.get('/', (req, res) => {
@@ -25,28 +36,44 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(__dirname, '../client/index.html'));
 });
 
-// routher for users
+
+// router for users
 app.use('/users', usersRouter);
-// roucter for news
+// router for news
 app.use('/news', newsRouter);
 
+// test get to signup
+app.get('/signup', (req, res) => {
+  console.log('WORKS!');
+  return res.status(200).json({'test':'it worked!'});
+});
+
 // create new user
-app.post('/signup', friendsController.createUser, (req, res) => {
+app.post('/signup', 
+  friendsController.createUser, 
+  sessionController.setSSIDCookie, 
+  sessionController.startSession, 
+  (req, res) => {
   console.log('request to /signup');
   console.log('redirect to homepage');
   return res.status(200).json(res.locals.user);
 });
 
 // login
-app.post('/login', friendsController.verifyUser, (req, res) => {
-  if (res.locals.user.length === 0) return next({ log: 'invalid login' });
-  return res.status(200).json(res.locals.user);
+app.post('/login', 
+  friendsController.verifyUser, 
+  sessionController.setSSIDCookie, 
+  sessionController.startSession,
+  (req, res) => {
+    if (res.locals.user.length === 0) return next({ log: 'invalid login' });
+    return res.status(200).json(res.locals.user);
 });
+
 
 // not sure what this is for. 
 app.post('/send', friendsController.sendMessage, (req, res) => {
   console.log('post to /send');
-  res.sendStatus(200);
+  res.status(200);
 });
 
 // catch all
