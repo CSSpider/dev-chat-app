@@ -6,13 +6,12 @@ import Navbar from './containers/Navbar';
 import Display from './containers/Display';
 // import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { useSelector, useDispatch } from "react-redux";
-import Auth from './components/auth';
-import "./styles.css";
+import Auth from './components/authentification/auth';
 
 const App = () => {
 
   const username = useSelector(state => state.users.currentUser);
-     
+  console.log('username App.js', username); 
   return (
     <>
       {username &&
