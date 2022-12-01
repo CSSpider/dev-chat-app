@@ -50,7 +50,7 @@ function ChatContainer (props) {
     <div className='chatbox-container'>
         <div id="chat">{chat}</div>
         <div id="msgAndSendBtn" style={{display: "flex"}}>
-          <input onChange={readInput} placeholder="Message" />
+          <textarea onChange={readInput} placeholder="Message" />
           <div id="sendBtn"><button onClick={submit}>Send</button></div>
         </div>
     </div>
