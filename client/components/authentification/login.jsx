@@ -10,7 +10,6 @@ const Login = ({loginPic, handleSubmit, onLogin, register}) => {
             </div>
             <form onSubmit={handleSubmit(onLogin)} className="login-form">
                 <input placeholder="Username..." className="auth-input" {...register("username", { required: true })} name="username" type="text" />
-                <input placeholder="Email..." className="auth-input" {...register("email", { required: true })} name="email" type="email" />
                 <input placeholder="Password..." className="auth-input" {...register("password", { required: true })} name="password" type="password" />
                 <input className="auth-input" type="submit" />
             </form>

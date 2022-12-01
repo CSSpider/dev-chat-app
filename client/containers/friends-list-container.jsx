@@ -21,7 +21,7 @@ export function FriendsContainer() {
     return (
         <div className="friendsList">
             <div className="header" >
-                <h3 id="friendListHeader">Friends</h3>
+                <h2 id="friendListHeader">Friends</h2>
             </div>
             <div className="friends">
                 {toRender}
