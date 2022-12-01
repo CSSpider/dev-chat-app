@@ -10,6 +10,8 @@ export function FriendsContainer() {
         dispatch(res);
     }), [])
 
+    
+
     const userData = useSelector(state => state.users.users);
     console.log('userData', userData)
     const toRender = [];
@@ -25,6 +27,7 @@ export function FriendsContainer() {
             </div>
             <div className="friends">
                 {toRender}
+                {console.log(toRender)}
             </div>
         </div>
     )
