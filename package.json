@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "dev-chat-room",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest --verbose",
     "start": "nodemon server/server.js",
     "dev": "NODE_ENV=development webpack serve --open & NODE_ENV=development nodemon ./server.js & node server/ws-server",
     "build": "NODE_ENV=production webpack"
@@ -18,13 +18,25 @@
     "url": "https://github.com/TACKware/Scratch-Project/issues"
   },
   "homepage": "https://github.com/TACKware/Scratch-Project#readme",
+  "jest": {
+    "globalSetup": "./jest-setup.js",
+    "globalTeardown": "./jest-teardown.js",
+    "testEnvironment": "jest-environment-jsdom",
+    "setupFilesAfterEnv": [
+      "@testing-library/jest-dom/extend-expect"
+    ]
+  },
   "dependencies": {
     "@codemirror/lang-javascript": "^6.1.1",
     "@reduxjs/toolkit": "^1.9.0",
+    "@testing-library/jest-dom": "^5.16.5",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
     "@uiw/codemirror-theme-okaidia": "^4.15.1",
     "@uiw/react-codemirror": "^4.15.1",
     "axios": "^1.2.0",
     "bcrypt": "^5.1.0",
+    "cookie-parser": "^1.4.6",
     "dotenv": "^16.0.3",
     "express": "^4.18.2",
     "node-fetch": "^3.3.0",
@@ -47,8 +59,10 @@
     "babel-loader": "^9.1.0",
     "css-loader": "^6.7.2",
     "html-webpack-plugin": "^5.5.0",
+    "jest-environment-jsdom": "^29.3.1",
     "nodemon": "^2.0.20",
     "style-loader": "^3.3.1",
+    "supertest": "^6.3.1",
     "webpack": "^5.75.0",
     "webpack-cli": "^5.0.0",
     "webpack-dev-server": "^4.11.1"

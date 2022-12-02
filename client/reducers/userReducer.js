@@ -3,7 +3,7 @@ import * as types from '../constants/actionTypes'
 const initialState = {
     currentUser: '',
     invalidCredentials: {status: false, message: ''},
-    users: []
+    users: new Set()
 }
 
 
@@ -35,14 +35,23 @@ const userReducer = (state = initialState, action) => {
                 invalidCredentials
             }
 
-        case types.LOAD_USERS:
-            console.log('in load users case');
-            const users = action.payload;
+        case types.ADD_CURRENT_USER:
+            //const users = new Set(action.payload);
+            console.log('state:', state);
+            console.log('current users:', action.payload, ' existing users:', state.users);
+            let users = new Set([...action.payload, ...state.users]);
+
+            const sortedSet = Array.from(users).sort();
+
+            users = new Set(sortedSet);
+
+            //users.add(action.payload);
+            console.log('USR REDUCER, NEW USER LIST:', users)
             return {
                 ...state,
                 users
             }
-            //action to authentificate a user
+
         default: {
             return state;
         }

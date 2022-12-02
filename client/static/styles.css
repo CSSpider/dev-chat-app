@@ -40,10 +40,12 @@ Styling for chat
 .navbar > ul > li {
     display: inline;
     background-color: var(--main-gray-color);
+    transition: color, 0.6s;
 }
 
 .navbar > ul > li:hover {
     cursor: pointer;
+    color: var(--main-pink-color);
 }
 
 
@@ -349,4 +351,14 @@ input[type="submit"]:hover {
 
 .error-buttons button:first-of-type {
     border-right: 1px solid var(--main-pink-color);
+}
+
+
+/* friendslist */
+.signedInUser {
+    display: block;
+}
+.news-container {
+    height: 100vh;
+    width: 100vw;
 }

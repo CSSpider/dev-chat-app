@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import MessageContainer from './message-container';
 
@@ -7,17 +7,19 @@ const client = new WebSocket('ws://localhost:3002');
 
 // imports
 import {codeChangeActionCreator} from '../actions/action-creators';
+import {newUserEnterActionCreator} from '../actions/action-creators';
+
 
 function ChatContainer (props) {
   
+  const allUsers = useSelector(state => state.users.users);
   const username = useSelector(state => state.users.currentUser);
+
   console.log('current User:', username);
   const [input, setInput] = useState('');
   const [sender, setUsername] = useState(username); // will come from redux
   const [receiver, setFriendName] = useState('kevindooley'); // will come from redux
   const [chatMessages, setChatMessages] = useState([]); // will come from redux
-
-    console.log('chatMessages', chatMessages);
 
   client.onmessage = (event) => {
     // parse incoming message event from the socket
@@ -29,17 +31,31 @@ function ChatContainer (props) {
       setChatMessages((prev) => [...prev, message]);
     }
 
-    console.log('-- MESSAGE LOG --', message);
-    console.log('--- SENDER ---', chatMessages.sender);
+    console.log('--- userTextValue ---',document.getElementById('userText').value)
 
     // else check if message is for the codebox
     if (message.type === 'code') {
       dispatch(codeChangeActionCreator(message.body))
     }
+
+    // else check if message is for the codebox
+    if (message.type === 'login') {
+      console.log('type - login', message.allUsers)
+      dispatch(newUserEnterActionCreator(message.allUsers))
+    }
   }
 
   // maybe this should be moved, this has to do with code change dispatching //
   const dispatch = useDispatch();
+
+  function loginToFriendList() {
+    const messageObj = {
+      type: 'login',
+      allUsers: [sender, ...allUsers]
+    }
+    console.log('messageObj in Submit: ', messageObj);
+    client.send(JSON.stringify(messageObj));
+  }
     
   function submit() {
     // console.log('pressed!');
@@ -52,10 +68,29 @@ function ChatContainer (props) {
     }
     console.log('messageObj in Submit: ', messageObj);
     client.send(JSON.stringify(messageObj));
+
+    // resetnd list of signed in folks
+    loginToFriendList();
   }
 
   function readInput(e) {
     setInput((prev) => e.target.value)
+  }
+
+  useEffect(()=>{
+    loginToFriendList();
+  },[])
+  // clears the input field after the message has been submitted
+  function clearText() {
+    document.getElementById('userText').value = '';
+  }
+
+  // sends the message when the user presses enter
+  function handleKeypress(e){
+    if(e.keyCode === 13 && document.getElementById('userText').value !== '') {
+      submit();
+      document.getElementById('userText').value = '';
+    }
   }
 
   let chat = [];
@@ -76,8 +111,8 @@ function ChatContainer (props) {
     <div className='chatbox-container'>
         <div id="chat">{chat}</div>
         <div id="msgAndSendBtn" style={{display: "flex"}}>
-          <textarea onChange={readInput} placeholder="Message" />
-          <div id="sendBtn"><button onClick={submit}>Send</button></div>
+          <textarea id="userText" onChange={readInput} placeholder="Message" onKeyDown={handleKeypress} />
+          <div id="sendBtn"><button onClick={function(e){submit(); clearText()}} >Send</button></div>
         </div>
     </div>
   )
@@ -85,15 +120,3 @@ function ChatContainer (props) {
 
 export default ChatContainer;
 
-/*
-import { useSelector, useDispatch } from "react-redux";
-
-export function FriendsContainer() {
-    const dispatch = useDispatch();
-    useEffect((async () => {
-        const res = await fetchAllUsers()();
-        dispatch(res);
-    }), [])
-
-    const userData = useSelector(state => state.users.users);
-    */

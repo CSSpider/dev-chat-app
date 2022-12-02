@@ -1,10 +1,10 @@
 import React from "react";
-import { useSelector, useDispatch } from "react-redux";
 
 export default function User (props) {
-    const {username, firstname, lastname} = props;
+    console.log('USER added- props', props)
+    console.log('USER added:', props.username)
     // console.log('rendering User', props)
     return (
-        <div className="user">{firstname}</div>
-    )
+        <div id={props.id} key={props.id} className="user">{props.username}</div>
+    );
 }
